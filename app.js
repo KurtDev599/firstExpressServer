@@ -8,6 +8,7 @@ const morgan = require('morgan')
 const cookieParser = require('cookie-parser')
 const session = require('express-session')
 const multer = require('multer')
+const { sequelize } = require('./models')
 
 const indexRouter = require('./routes/index')
 const userRouter = require('./routes/user')
@@ -27,6 +28,14 @@ app.use(session({
     httpOnly: true
   },
 }))
+
+sequelize.sync({ force: false })
+  .then(() => {
+    console.log('데이터베이스 연결 성공')
+  })
+  .catch((err) => {
+    console.log(err)
+  })
 
 app.use('/', indexRouter)
 app.use('/user', userRouter)
