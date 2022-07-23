@@ -7,6 +7,10 @@ module.exports = class Comment extends Sequelize.Model {
         type: Sequelize.STRING(100),
         allowNull: false
       },
+      userId: {
+        type: Sequelize.INTEGER.UNSIGNED,
+        allowNull: false
+      },
       created_at: {
         type: Sequelize.DATE,
         allowNull: true,
@@ -24,6 +28,6 @@ module.exports = class Comment extends Sequelize.Model {
     })
   }
   static associate(db) {
-    db.Comment.belongsTo(db.User, { foreignkey: 'commenter', sourceKey: 'id' })
+    db.Comment.belongsTo(db.User, { foreignkey: 'userId', sourceKey: 'UserId' })
   }
 }

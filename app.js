@@ -12,6 +12,7 @@ const { sequelize } = require('./models')
 
 const indexRouter = require('./routes/index')
 const userRouter = require('./routes/user')
+const commentRouter = require('./routes/comment')
 
 app.set('port', process.env.PORT || 3000);
 
@@ -39,6 +40,7 @@ sequelize.sync({ force: false })
 
 app.use('/', indexRouter)
 app.use('/user', userRouter)
+app.use('/comment', commentRouter)
 
 // app.use((req, res, next) => {
 //   console.log('all router')
